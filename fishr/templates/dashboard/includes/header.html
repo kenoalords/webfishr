@@ -1,0 +1,30 @@
+{% load static menu_active %}
+<nav class="navbar is-fixed-top is-transparent">
+    <div class="container">
+        <div class="navbar-brand">
+            <div class="navbar-item" id="logo">
+                <a href="{% url 'index' %}?utm_source=navbar+logo">
+                    <img src="{% static 'images/logo-black.png' %}" alt="WebFisher - Web design company in lagos nigeria">
+                </a>
+            </div>
+            <a href="javascript:;" class="navbar-burger" id="main-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+        </div>
+        <div class="navbar-menu" id="main-menu">
+            <div class="navbar-end">
+                <a href="{% url 'index' %}" class="navbar-item">
+                    Home
+                </a>
+                <a href="{% url 'dashboard' %}" class="navbar-item {{ request.path|menu_active:'/dashboard/' }}">
+                    My Account
+                </a>
+                <a href="{% url 'account_logout' %}" class="navbar-item">
+                    Logout
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

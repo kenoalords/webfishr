@@ -1,0 +1,39 @@
+{% if themes %}
+    {% load humanize %}
+    <div class="columns is-multiline themes is-mobile">
+    {% for theme in themes %}
+        <div class="column theme is-one-third-desktop is-half-touch">
+            <div class="box">
+                {% if theme.featured == True %}
+                    <span class="is-featured">
+                        <div>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </span>
+                {% endif %}
+                <figure class="image">
+                    <a href="{% url 'design' slug=theme.slug %}?utm_source=preview+image">
+                        <img src="{{ theme.image.url }}" alt="{{ theme.title }}">
+                    </a>
+                    <div class="level actions">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <figcaption>
+                                    <a href="{% url 'design' slug=theme.slug %}?utm_source=preview+title">
+                                        {{ theme.title }}
+                                    </a>
+                                </figcaption>
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="level-item">
+                                <a href="{% url 'signup' %}?theme={{ theme.pk }}" class="button is-small is-link is-rounded">Order</a>
+                            </div>
+                        </div>
+                    </div>
+                </figure>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endif %}

@@ -1,0 +1,61 @@
+{% extends './base.html' %}
+{% load humanize static %}
+{% block content %}
+    {% include './includes/messages.html' %}
+    <div class="box">
+    <h2 class="title is-4 is-size-4-mobile has-text-weight-bold">{{ orders.count }} Website Package(s)</h2>
+    {% if orders %}
+        <table class="table is-stripped is-fullwidth is-bordered is-hoverable">
+            <thead>
+                <tr>
+                    <th>Package</th>
+                    <th>Theme</th>
+                    <th>Amount</th>
+                    <th>Domain</th>
+                    <th>Date</th>
+                    <th>Payment</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.package.title }}</td>
+                        <td>
+                            {% if order.theme %}
+                                <a href="{{ order.theme.get_absolute_url }}">{{ order.theme.title }}</a>
+                            {% endif %}
+                        </td>
+                        <td>N{{ order.amount|intcomma }}</td>
+                        <td>{{ order.domain_name }}</td>
+                        <td>{{ order.date|date:'jS M, Y' }}</td>
+                        <td>
+                            {% if order.is_paid == True %}
+                                <span class="button is-small is-success is-rounded">
+                                    <span class="icon"><i class="fas fa-check"></i></span>
+                                    <span>Paid</span>
+                                </span>
+                            {% else %}
+                                <a href="{{ order.get_absolute_url }}" class="button is-small is-danger is-rounded">
+                                    <span class="icon"><i class="fas fa-exclamation-triangle"></i></span>
+                                    <span>Pay now</span>
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <hr>
+        <p>
+            You have not signed up for any of our website packages. <a href="mailto:web@webfishr.com?subject=I+need+help!">Contact us now</a> if you are having troubles deciding which package works best for your needs.
+        </p>
+        <p>
+            <div class="buttons">
+                <a href="{% url 'themes' %}" class="button is-link">Browse website themes</a>
+                <a href="{% url 'pricing' %}" class="button is-link">View packages</a>
+            </div>
+        </p>
+    {% endif %}
+    </div>
+{% endblock %}

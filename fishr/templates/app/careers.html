@@ -1,0 +1,50 @@
+{% extends './base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="hero is-medium is-dark" id="themes">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-aligned-center">
+                <div class="column is-7">
+                    <h1 class="title is-2 is-size-2-mobile has-text-weight-bold">
+                        Want to join our formidable team of digital experts?
+                    </h1>
+                    <p>
+                        Here is how to go about it.
+                    </p>
+                </div>
+                <div class="column is-3 is-offset-1">
+                    <figure class="image">
+                        <img src="{% static 'images/Data_analysis_PNG.png' %}" alt="Our formidable team">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="container">
+        <div class="columns is-aligned-center">
+
+            <div class="column is-8">
+                <p>
+                    Our team is made up of web designers, software developers, graphics designers, SEO experts, digital marketers and content writers.
+                </p>
+                <p>
+                    We are constantly in need of young talents with a desire to learn, grow and become an intricate part of our team.
+                </p>
+                <p>
+                    If you are ready to take your skills to the next level, we will be glad to take a look at your CV.
+                </p>
+                <p>
+                    Send your CV to <strong>web(at)webfishr(dot)com</strong> with the subject line <strong>{Let me in!}</strong>
+                </p>
+            </div>
+            <div class="column is-3 is-offset-1">
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends './base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="hero is-medium is-dark" id="themes">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-7">
+                    <h1 class="title is-2 is-size-2-mobile has-text-weight-bold has-text-centered">
+                        About Us
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section is-medium">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <p>
+                    <a href="{% url 'index' %}">WebFishr</a> is an online web design and management service founded by <a href="https://clickmedia.com.ng" target="_blank">Clickmedia Solutions</a> to offer online services to businesses across Nigeria.
+                </p>
+                <p>
+                    Our team is made up of seasoned professionals with more than 11years working experience helping businesses design and manage their online presence.
+                </p>
+                <p>
+                    Our vast experience is evident in our approach to solving challenges businesses encounter in their daily operations.
+                </p>
+                <p>
+                    WebFishr services will help you accomplish your online goals, get new customers and scale your online presence without loosing sight of your business goals.
+                </p>
+                <p>
+                    Our <a href="{% url 'themes' %}">services</a> are <a href="{% url 'pricing' %}">very affordable</a> and designed to fit into any budget.
+                </p>
+                <p>
+                    If you're not sure on how to get started with <a href="{% url 'index' %}">WebFishr</a> or want to find out how we can solve your online presence challenges, send us a mail to <strong>web(at)webfishr(dot)com</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

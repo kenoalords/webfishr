@@ -1,0 +1,8 @@
+node_modules/
+media/
+assets/
+webfishr/settings.py
+db.sqlite3
+mix-manifest.json
+package-lock.json
+webpack.mix.js

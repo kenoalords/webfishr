@@ -1,0 +1,180 @@
+{% extends './base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="hero is-" id="hero">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-aligned-center">
+                <div class="column is-6">
+                    <h1 class="title is-2 has-text-weight-bold">Earn your clients trust with a professional online presence today.</h1>
+                    <h2 class="subtitle">Get a website you'd be proud of in 48 hours and grow your business without the usual stress.</h2>
+                    <div class="buttons">
+                        <a href="{% url 'themes' %}?utm_source=hero+banner" class="button is-primary is-rounded">Choose your website</a>
+                        <a href="{% url 'how-it-works' %}?utm_source=hero+banner" class="button is-white is-rounded">How it works</a>
+                    </div>
+                </div>
+                <div class="column is-6">
+                    <figure class="image">
+                        <img src="{% static 'images/hero-main.png' %}" alt="Website design in Nigeria for Businesses">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-aligned-center">
+
+            <div class="column is-6">
+                <h2 class="title is-2 has-text-weight-light">Send emails as a professional with your personalized business email.</h2>
+                <p>
+                    Stand out from the crowd with your own personalized business email and earn trust from your clients.
+                </p>
+                <p>
+                    You have the freedom to choose which <strong>email@yourbusiness.com</strong> you need.
+                </p>
+                <p>
+                    <a href="{% url 'themes' %}" class="button is-primary is-rounded">Start your website</a>
+                </p>
+            </div>
+            <div class="column is-5 is-offset-1">
+                <figure class="image">
+                    <img src="{% static 'images/email.png' %}" alt="Send emails the right way">
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-aligned-center">
+            <div class="column is-6">
+                <figure class="image">
+                    <img src="{% static 'images/search.png' %}" alt="Help clients find your services online">
+                </figure>
+            </div>
+            <div class="column is-6">
+                <h2 class="title is-2 has-text-weight-light">Help new clients find your services online quickly.</h2>
+                <p>
+                    Don't drown your business competing for attention on social media.
+                </p>
+                <p>
+                    Get a professional website to showcase your products &amp; services and make it easy for new clients to find you online.
+                </p>
+                <p>
+                    <a href="{% url 'themes' %}" class="button is-rounded is-primary">Choose your website</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section is-medium">
+    <div class="container">
+        <div class="columns is-aligned-center">
+
+            <div class="column is-6 ">
+                <h2 class="title is-2 has-text-weight-light">Spend less time explaining what you do and more time closing deals.</h2>
+                <p>
+                    Let your website do all the talking while you focus on growing your business and closing new deals.
+                </p>
+                <p>
+                    <a href="{% url 'themes' %}" class="button is-primary is-rounded">Start your website</a>
+                </p>
+            </div>
+            <div class="column is-5 is-offset-1">
+                <figure class="image">
+                    <img src="{% static 'images/business.png' %}" alt="Spend less time explaining what you do">
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-aligned-center">
+
+
+            <div class="column is-5">
+                <figure class="image">
+                    <img src="{% static 'images/managment.png' %}" alt="Lets design and manage your website">
+                </figure>
+            </div>
+
+            <div class="column is-6 is-offset-1">
+                <h2 class="title has-text-weight-light is-2">
+                    Enjoy the convenience of having seasoned experts manage your online presence.
+                </h2>
+                <p>
+                    Have the freedom to focus on your business while we get our hands down and dirty with all you technical jargons you shouldn't care about.
+                </p>
+                <p>
+                    <a href="{% url 'themes' %}" class="button is-rounded is-primary">Choose your website</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section is-medium">
+    <div class="container">
+        <div class="columns is-aligned-center">
+            <div class="column is-6">
+                <h2 class="title has-text-weight-light is-2">
+                    Get affordable website packages at the cost of a smartphone.
+                </h2>
+                <p>You don't have to rob a bank to pay for a professional online presence.</p>
+                <p>Find the right website package within your budget and take control of your online presence today.</p>
+                <p>It is that easy!</p>
+                <p>
+                    <a href="{% url 'pricing' %}" class="button is-primary is-rounded">Choose a package</a>
+                </p>
+            </div>
+            <div class="column is-5 is-offset-1">
+                <figure class="image">
+                    <img src="{% static 'images/package.png' %}" alt="affordable website design packages">
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section is-dark">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-8 has-text-centered">
+                <h2 class="title has-text-weight-light is-2">Gift your business a professional website and build your clients trust.</h2>
+                <p class="subtitle">Your business will thank you for it</p>
+                <p>
+                    <a href="{% url 'signup' %}" class="button is-warning is-rounded">Sign up today</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <h3 class="title has-text-weight-light is-3 has-text-centered">Here is what our clients have to say.</h3>
+        {% include './includes/testimonials.html' %}
+    </div>
+</section>
+<div class="section is-medium is-light">
+    <div class="container">
+        <div class="has-text-centered">
+            <h3 class="title has-text-weight-light is-2 has-text-centered">Your website. Your price.</h3>
+            <p class="subtitle">Pick a package that suits your budget</p>
+        </div>
+        {% include './includes/packages.html' %}
+    </div>
+</div>
+{% endblock %}

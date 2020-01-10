@@ -1,0 +1,45 @@
+{% extends './base.html' %}
+
+{% block content %}
+{% load static i18n %}
+    {{ wizard.form.media }}
+    <div class="section is-medium">
+        <div class="container">
+
+            <!-- <hr> -->
+            {% include './includes/order_steps.html' with wizard=wizard %}
+
+            <form action="" method="post" id="profile-details" novalidate>
+                {% csrf_token %}
+                {{ wizard.management_form }}
+
+                <div class="columns is-centered profile-details">
+                    <div class="column is-7">
+                        <h2 class="title is-3 is-size-4-mobile has-text-weight-bold has-text-centered">Provide your details</h2>
+                        <hr>
+                        {{ wizard.form.non_field_error }}
+                        <div class="field">
+                            <h4 class="title is-4 has-text-weight-bold">Domain name</h4>
+                            {{ wizard.form.domain_name }}
+                            <span class="help">This can be a domain name you already own or one you like to register. e.g <strong>www.mycompanyname.com</strong></span>
+                            <span class="help is-danger">{{ wizard.form.domain_name.errors }}</span>
+                        </div>
+                        <hr>
+                        
+
+                        <div class="field">
+                            <label for="{{ wizard.form.tos.id_for_label }}">
+                                {{ wizard.form.tos }}
+                                {{ wizard.form.tos.label }}
+                            </label>
+                            <span class="help is-danger">{{ wizard.form.tos.errors }}</span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                {% include './includes/order_steps_buttons.html' with wizard=wizard %}
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

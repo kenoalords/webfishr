@@ -1,0 +1,34 @@
+{% extends './base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="hero" id="themes">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-aligned-center">
+                <div class="column is-6">
+                    <h1 class="title is-2 has-text-weight-bold">
+                        Make your online presence beautiful with our custom website design.
+                    </h1>
+                    <p>
+                        Our beautiful website design collection are custom-made with you in mind giving you the right style for your online presence.
+                    </p>
+                    <p>
+                        Choose any of our professionally designed website theme for your new website.
+                    </p>
+                </div>
+                <div class="column is-6">
+                    <figure class="image">
+                        <img src="{% static 'images/hero-main.png' %}" alt="Make your online presence beautiful">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section is-light">
+    <div class="container">
+        {% include './includes/themes.html' %}
+    </div>
+</div>
+{% endblock %}

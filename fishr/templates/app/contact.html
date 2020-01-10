@@ -1,0 +1,42 @@
+{% extends './base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="hero is-medium is-primary" id="themes">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-aligned-center is-centered">
+                <div class="column is-8">
+                    <h1 class="title is-2 is-size-2-mobile has-text-weight-bold">
+                        Got questions?
+                    </h1>
+                    <p class="subtitle">
+                        We'd love to help you find the right answers.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section is-medium">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <h2 class="title is-3">Check our FAQ</h2>
+                <p>We have put together our frequently asked questions to guide you. This will answer 97% of any questions you've got. Guaranteed!!!</p>
+                <p>
+                    <a href="{% url 'faq' %}?utm_source=contact+page" class="button is-primary is-rounded">Check our FAQ</a>
+                </p>
+                <hr>
+                <p>
+                    If you fall into our special 3% category, then our team of digital experts are ready to answer any questions you might have regarding our services and how it will be of benefit to you.
+                </p>
+
+                <p>
+                    <a href="mailto:web@webfishr.com" class="button is-primary is-rounded">Send us a mail</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

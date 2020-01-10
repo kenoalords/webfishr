@@ -1,0 +1,98 @@
+{% extends './base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="hero is-link">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-centered is-aligned-center">
+                <div class="column is-6">
+                    <h1 class="title is-2 is-size-3-mobile has-text-weight-bold">
+                        How it works
+                    </h1>
+                    <p class="subtitle">
+                        Here's how quickly it is to get up and running with our web design and management service.
+                    </p>
+                </div>
+                <div class="column is-5 is-offset-1">
+                    <figure class="image">
+                        <img src="{% static 'images/hero-main.png' %}" alt="Website design in Nigeria for Businesses">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section"  id="works">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-7">
+                <p>
+                    Are you ready to take your online presence to greater heights with our professional services? Here is how we help you design and manage your online presence from the ground up and work with you closely to help you achieve your goals.
+                </p>
+                <hr>
+                <ul class="steps is-thin is-vertical" id="how-steps">
+                    <li class="steps-segment">
+                        <span class="steps-marker"></span>
+                        <div class="steps-content">
+                            <h2 class="is-3 has-text-weight-bold is-size-4-mobile title">Domain name &amp; hosting</h2>
+                            <p>We handle the registration of your domain name and hosting of your website so you don't have to. Domain names are subject to availability, if you'd like to know if a domain you're interested in is available, <a href="https://www.namecheap.com/domains/">click here to look it up from one of our domain registration partners</a>.</p>
+                            <p>Don't want to stress yourself? <a href="{% url 'signup' %}?utm_source=how+it+works">Sign up for an account</a> and we will help you look it up.</p>
+                            <p>
+                                Domain name and hosting renews at <strong>N10,000</strong> every year.
+                            </p>
+                        </div>
+                    </li>
+                    <li class="steps-segment">
+                        <span class="steps-marker"></span>
+                        <div class="steps-content">
+                            <h2 class="is-3 has-text-weight-bold is-size-4-mobile title">Personalized email address</h2>
+                            <p>Our support team will setup your personalized business email address once you <a href="{% url 'signup' %}?utm_source=how+it+works">sign up for an account</a> and your domain name is registered.</p>
+                            <p>
+                                Start sending professional emails from <strong>youremail@yourcompany.com</strong> in as little as 48 hours once your <a href="{% url 'signup' %}?utm_source=how+it+works">sign up</a> is complete and verified.
+                            </p>
+                        </div>
+                    </li>
+                    <li class="steps-segment">
+                        <span class="steps-marker"></span>
+                        <div class="steps-content">
+                            <h2 class="is-3 has-text-weight-bold is-size-4-mobile title">Affordable website packages</h2>
+                            <p>Our website design packages are affordable and fits into any budget. <a href="{% url 'pricing' %}?utm_source=how+it+works">Choose a package</a> that works best for your needs and we'll handle the rest.</p>
+                        </div>
+                    </li>
+                    <li class="steps-segment">
+                        <span class="steps-marker"></span>
+                        <div class="steps-content">
+                            <h2 class="is-3 has-text-weight-bold is-size-4-mobile title">Professional website themes</h2>
+                            <p>Our website themes are beautiful and user-friendly, designed to give you the perfect online presence your business deserves. <a href="{% url 'themes' %}?utm_source=how+it+works">Browse our website theme collection</a> to find the one that best fit your needs.</p>
+                        </div>
+                    </li>
+                    <li class="steps-segment">
+                        <span class="steps-marker"></span>
+                        <div class="steps-content">
+                            <h2 class="is-3 has-text-weight-bold is-size-4-mobile title">Year round support</h2>
+                            <p>Enjoy year round support from our team of experts when you <a href="{% url 'themes' %}?utm_source=how+it+works">sign up</a> for any of our <a href="{% url 'pricing' %}?utm_source=how+it+works">website design packages</a>.</p>
+                            <p>We will never leave you bitting the dust</p>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="column is-4 is-offset-1">
+                <div class="box">
+                    <p class="title has-text-weight-bold is-3">
+                        Are you ready for the perfect online presence?
+                    </p>
+                    <p>
+                        It's just a click away.
+                    </p>
+                    <hr>
+                    <p>
+                        <a href="{% url 'themes' %}?utm_source=how+it+works" class="button is-primary is-rounded is-fullwidth">Choose your website</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

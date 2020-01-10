@@ -1,0 +1,68 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+<h1 class="title is-3 is-bold is-size-4-mobile has-text-centered has-text-weight-bold">{% trans "Sign up" %}</h1>
+
+<form class="signup disable-on-submit" id="signup_form" method="post" action="{% url 'account_signup' %}">
+    {% csrf_token %}
+
+    <div class="field">
+        {{ form.first_name }}
+        {% if form.first_name.errors %}
+            <span class="help is-danger">{{ form.first_name.errors }}</span>
+        {% endif %}
+    </div>
+
+    <div class="field">
+        {{ form.last_name }}
+        {% if form.last_name.errors %}
+            <span class="help is-danger">{{ form.last_name.errors }}</span>
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <div class="field">
+        {{ form.email }}
+        {% if form.email.errors %}
+            <span class="help is-danger">{{ form.email.errors }}</span>
+        {% endif %}
+    </div>
+
+    <div class="field">
+        {{ form.password1 }}
+        {% if form.password1.errors %}
+            <span class="help is-danger">{{ form.password1.errors }}</span>
+        {% endif %}
+    </div>
+
+    <div class="field">
+        {{ form.password2 }}
+        {% if form.password2.errors %}
+            <span class="help is-danger">{{ form.password2.errors }}</span>
+        {% endif %}
+    </div>
+
+    <div class="field">
+        {{ form.captcha }}
+        {% if form.captcha.errors %}
+            <span class="help is-danger">{{ form.captcha.errors }}</span>
+        {% endif %}
+    </div>
+
+    <hr>
+    {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <div class="field">
+        <button type="submit" class="button is-primary is-fullwidth is-rounded">{% trans "Create my account" %}</button>
+    </div>
+</form>
+<hr>
+<p>{% blocktrans %}Already have an account? <a href="{{ login_url }}" class="is-bold"><strong>Sign in</strong></a>.{% endblocktrans %}</p>
+{% endblock %}

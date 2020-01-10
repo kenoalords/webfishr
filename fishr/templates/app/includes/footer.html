@@ -1,0 +1,79 @@
+{% load static %}
+<section class="is-dark section" id="newsletters">
+    <div class="container">
+        <div class="columns is-aligned-center">
+            <div class="column is-3 is-offset-1">
+                <figure class="image newsletter">
+                    <img src="{% static 'images/newsletter-2.png' %}" alt="Enjoy amazing discounts">
+                </figure>
+            </div>
+            <div class="column is-6 is-offset-1">
+                <h3 class="title is-3 has-text-weight-bold">
+                    Get discounts and all the fun stuffs directly to your mailbox.
+                </h3>
+                <p class="subtitle">Subscribe today for monthly updates</p>
+                {% if email_form %}
+                <form action="{% url 'subscribe-email' %}" method="post" id="email-subscription-footer">
+                    {% csrf_token %}
+                    <div class="field has-addons">
+                        <p class="control">
+                            {{ email_form.email }}
+                        </p>
+                        <p class="control">
+                            <button class="button is-warning is-rounded">Subscribe</button>
+                        </p>
+                    </div>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+<footer id="site-footer" class="footer">
+    <div class="container">
+        <div class="columns">
+
+
+            <div class="column">
+                <h4 class="title is-4 has-text-white has-text-weight-bold">Website Design</h4>
+                <ul class="menu">
+                    <li><a href="{% url 'themes' %}?utm_source=footer">Browse Themes</a></li>
+                    <li><a href="{% url 'pricing' %}?utm_source=footer">Pricing</a></li>
+                    <li><a href="{% url 'signup' %}?utm_source=footer">Request Website</a></li>
+                    <li><a href="{% url 'faq' %}?utm_source=footer">Frequently Asked Questions</a></li>
+                </ul>
+            </div>
+            <div class="column">
+                <h4 class="title is-4 has-text-white has-text-weight-bold">Resource</h4>
+                <ul class="menu">
+                    <li><a href="{% url 'themes' %}?utm_source=footer">Blog</a></li>
+                    <li><a href="{% url 'career' %}?utm_source=footer">Career</a></li>
+                    <li><a href="{% url 'signup' %}?utm_source=footer">News &amp; Updates</a></li>
+                </ul>
+            </div>
+            <div class="column">
+                <h4 class="title is-4 has-text-white has-text-weight-bold">Company</h4>
+                <ul class="menu">
+                    <li><a href="{% url 'about' %}?utm_source=footer">About Us</a></li>
+                    <li><a href="{% url 'how-it-works' %}?utm_source=footer">How it works</a></li>
+                    <li><a href="{% url 'contact' %}?utm_source=footer">Contact</a></li>
+                    <li><a href="{% url 'policy' %}?utm_source=footer">Privacy Policy</a></li>
+                    <li><a href="{% url 'contact' %}?utm_source=footer">Terms &amp; Condition</a></li>
+                </ul>
+            </div>
+            <div class="column">
+                <h4 class="title is-4 has-text-white has-text-weight-bold">Connect</h4>
+                <p>We know you might have lots of question so feel free to reach out to us.</p>
+                <div class="social-icons buttons">
+                    <a href="mailto:web@webfishr.com" class="button is-warning is-rounded is-small"><i class="fas fa-envelope"></i></a>
+                    <a href="#" class="button is-warning is-rounded is-small"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="button is-warning is-rounded is-small"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="button is-warning is-rounded is-small"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="credits has-text-centered">
+            &copy; Copyright 2019 - All Rights Reserved | <a href="{% url 'index' %}">WebFishr</a> is an online service provided by <a href="http://clickmedia.com.ng" target="_blank">Clickmedia Solutions</a> | <a href="https://www.freepik.com/">Free vectors by freepik</a>
+        </div>
+    </div>
+</footer>

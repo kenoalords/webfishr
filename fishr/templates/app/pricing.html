@@ -1,0 +1,31 @@
+{% extends './base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="hero" id="themes">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-aligned-center">
+                <div class="column is-6">
+                    <h1 class="title is-2 has-text-weight-bold">
+                        Affordable website design packages for everyone.
+                    </h1>
+                    <p class="">
+                        You won't find these amazing deals anywhere else. Choose a package today and get your brand new website in 3 working days.
+                    </p>
+                </div>
+                <div class="column is-5 is-offset-1">
+                    <figure class="image">
+                        <img src="{% static 'images/pricing.png' %}" alt="Affordable website design packages for everyone">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section is-light">
+    <div class="container">
+        {% include './includes/packages.html' %}
+    </div>
+</div>
+{% endblock %}

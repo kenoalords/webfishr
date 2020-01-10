@@ -1,0 +1,40 @@
+{% if packages %}
+    {% load humanize discount %}
+    <div class="columns is-multiline packages">
+    {% for package in packages %}
+        <div class="column package is-4">
+            <div class="box">
+                <header>
+                    <h2 class="title is-3">{{ package.title }}</h2>
+                    <p>{{ package.description }}</p>
+                    <div class="price">
+                        {% if package.regular_price %}
+                            <del class="regular-price">Was N{{ package.regular_price|intcomma }}</del>
+                        {% endif %}
+                        <span class="sale-price">N{{ package.sale_price|intcomma }}</span>
+                        <div class="discount">
+                            <span class="discount_tag">
+                                <span>
+                                    <div>{{ package.regular_price|package_discount:package.sale_price }}</div>
+                                    <div>OFF</div>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </header>
+                <!-- <hr> -->
+                {% if package.features %}
+                    <ul class="features">
+                        {% for feature in package.features.all %}
+                            <li>{{ feature.title }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <div class="action">
+                    <a href="{% url 'signup' %}?package={{ package.id }}" class="button is-primary is-rounded is-fullwidth">Choose Package</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+{% endif %}

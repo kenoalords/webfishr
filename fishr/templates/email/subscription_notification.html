@@ -1,0 +1,12 @@
+{% extends './base.html' %}
+{% block content %}
+    <h1>Hello,</h1>
+    <p>Thank you for joining our awesome mailing list.</p>
+    <p>Please click on the link below to activate your email.</p>
+    <p><a href="{{ current_site.domain }}{% url 'email_verify' uuid=uuid %}" class="btn btn-primary">Activate my email</a></p>
+    <br>
+    <strong>BR.</strong>
+    <p>
+        <strong>{{ current_site.name }} Team</strong>
+    </p>
+{% endblock %}

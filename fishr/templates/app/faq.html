@@ -1,0 +1,47 @@
+{% extends './base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="hero is-medium" id="themes">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-aligned-center is-centered">
+                <div class="column is-8">
+                    <h1 class="title is-2 is-size-2-mobile has-text-weight-bold">
+                        Frequently asked questions
+                    </h1>
+                    <p class="subtitle">
+                        Find answers to some of the questions you might have regarding our services.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section is-light">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-8">
+                {% if faqs %}
+                    <dl class="faqs">
+                    {% for faq in faqs %}
+                        <div class="box">
+                            <dt>{{ faq.question }}</dt>
+                            <dd>{{ faq.answer }}</dd>
+                        </div>
+                    {% endfor %}
+                    </dl>
+                {% endif %}
+                <hr>
+                <p>
+                    Have more question?
+                </p>
+
+                <p>
+                    <a href="mailto:web@webfishr.com" class="button is-primary">Send us a mail</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

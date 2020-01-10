@@ -1,0 +1,32 @@
+{% extends './base.html' %}
+
+{% block content %}
+{% load static i18n %}
+    {{ wizard.form.media }}
+    <div class="section is-medium">
+        <div class="container">
+
+            <!-- <hr> -->
+            {% include './includes/order_steps.html' with wizard=wizard %}
+
+            <form action="" method="post">
+                <h2 class="title is-3 is-size-4-mobile has-text-weight-bold has-text-centered">Choose your website design</h2>
+                <hr>
+                {% csrf_token %}
+                {{ wizard.management_form }}
+
+                {% if wizard.form.forms %}
+                    {{ wizard.form.management_form }}
+                    {% for form in wizard.form.forms %}
+                        {{ form }}
+                    {% endfor %}
+                {% else %}
+                    {{ wizard.form.as_p }}
+                {% endif %}
+                <hr>
+                {% include './includes/order_steps_buttons.html' with wizard=wizard %}
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
