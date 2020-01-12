@@ -1,8 +1,10 @@
 node_modules/
 media/
 assets/
+fishr/migrations/
 webfishr/settings.py
 db.sqlite3
 mix-manifest.json
 package-lock.json
+package.json
 webpack.mix.js

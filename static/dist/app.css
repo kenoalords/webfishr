@@ -11713,7 +11713,7 @@ p {
   margin-top: 4em;
 }
 .navbar .navbar-brand #logo img {
-  min-height: 2.618em;
+  min-height: 3.5em;
 }
 .navbar .navbar-brand .navbar-burger span {
   height: 2px;
@@ -12172,9 +12172,10 @@ dl.faqs dd:before {
   .navbar {
     padding-right: 10px;
     padding-left: 10px;
+    border-bottom: 1px solid #eee;
   }
   .navbar:hover {
-    background: none;
+    background: #fff;
   }
   .navbar .navbar-brand .navbar-burger {
     position: relative;
@@ -12209,5 +12210,22 @@ dl.faqs dd:before {
 
   .navbar .navbar-brand #logo img {
     min-height: 3.118em;
+  }
+
+  .columns.is-flipped-mobile {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+            flex-direction: column-reverse;
+  }
+
+  .section.is-small-image-mobile .title.is-2 {
+    font-size: 1.6132em;
+    font-weight: 900 !important;
+  }
+  .section.is-small-image-mobile figure.image img {
+    max-width: 240px;
+    margin: 0 auto;
   }
 }
