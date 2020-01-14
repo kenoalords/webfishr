@@ -7,23 +7,36 @@
                     <img src="{% static 'images/webfishr-logo.png' %}" alt="WebFisher - Web design company in lagos nigeria">
                 </a>
             </div>
-            <a href="javascript:;" class="navbar-burger" id="main-menu">
+            <a href="javascript:;" class="navbar-burger" data-target="main-menu">
                 <span></span>
                 <span></span>
                 <span></span>
             </a>
         </div>
+
         <div class="navbar-menu" id="main-menu">
             <div class="navbar-end">
                 <a href="{% url 'index' %}" class="navbar-item">
                     Home
                 </a>
+
+                {% if request.user.is_superuser %}
+                <a href="{% url 'admin_blog' %}" class="navbar-item">
+                    Blog
+                </a>
+                {% endif %}
                 <a href="{% url 'dashboard' %}" class="navbar-item {{ request.path|menu_active:'/dashboard/' }}">
                     My Account
                 </a>
                 <a href="{% url 'account_logout' %}" class="navbar-item">
                     Logout
                 </a>
+                <div class="navbar-item">
+                    <a href="{% url 'signup' %}" class="button is-primary is-rounded is-fullwidth">
+                        Get a website
+                    </a>
+                </div>
+
             </div>
         </div>
     </div>

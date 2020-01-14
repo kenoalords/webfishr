@@ -1,0 +1,58 @@
+{% extends './base.html' %}
+
+{% block content %}
+{% load static %}
+<article class="blog blog-{{ blog.pk }}">
+    <header class="hero is-medium is-link">
+        <div class="hero-body">
+            <div class="container">
+                <div class="columns is-centered">
+                    <div class="column is-8">
+                        <h1 class="title is-2 is-size-2-mobile has-text-weight-bold">
+                            {{ blog.title }}
+                        </h1>
+                        <p class="date">
+                            {% if blog.updated_at > blog.created_at %}
+                                Last updated - {{ blog.updated_at|date:'jS M, Y' }}
+                            {% else %}
+                                Posted - {{ blog.created_at|date:'jS M, Y' }}
+                            {% endif %}
+                        </p>
+                        <p class="excerpt">
+                            {{ blog.excerpt }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    {% if blog.image %}
+                    <figure class="image post-thumbnail">
+                        <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+                         </figure>
+                    {% endif %}
+                    <div class="content">
+                        {{ blog.content|safe }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+{% if blogs %}
+<div class="section is-light">
+    <div class="container">
+        <h3 class="title is-4 has-text-weight-bold">Read more</h3>
+        <div class="columns blog-list">
+            {% include './includes/blog_list.html' with blogs=blogs %}
+        </div>
+    </div>
+</div>
+{% endif %}
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e1db9ecbbd41b21"></script>
+{% endblock %}

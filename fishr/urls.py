@@ -9,6 +9,8 @@ urlpatterns = [
     path('career/', view.CareerTemplateView.as_view(template_name="app/careers.html"), name='career'),
     path('contact/', view.CareerTemplateView.as_view(template_name="app/contact.html"), name='contact'),
     path('about/', view.AboutTemplateView.as_view(template_name="app/about.html"), name='about'),
+    path('blog/<int:pk>/<str:slug>', view.BlogDetailView.as_view(), name='blog'),
+    path('blog/', view.BlogPageListView.as_view(), name='blogs'),
     path('privacy-policy/', view.PolicyTemplateView.as_view(template_name="app/policy.html"), name='policy'),
     path('how-it-works/', view.HowItWorksTemplateView.as_view(template_name="app/how-it-works.html"), name='how-it-works'),
     path('signup/', view.OrderWizardView.as_view(), name="signup"),
@@ -22,5 +24,7 @@ urlpatterns = [
     path('subscribe/', view.SubscribeEmail.as_view(), name="subscribe-email"),
     path('subscribe/<str:uuid>/success', view.SubscriptionSuccessful.as_view(), name="email_sub_successful"),
     path('subscribe/<str:uuid>/verify', view.SubscriptionVerify.as_view(), name="email_verify"),
-
+    path('dashboard/blog/', view.BlogListView.as_view(), name="admin_blog"),
+    path('dashboard/blog/add/', view.BlogAddTemplateView.as_view(), name="blog_add"),
+    path('dashboard/blog/<int:pk>/edit/', view.BlogEditTemplateView.as_view(), name="blog_edit"),
 ] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -15,9 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.sitemaps.views import sitemap
+from fishr.sitemaps import BlogSitemap, StaticSitemap
+
+sitemaps = {
+    'blog': BlogSitemap,
+    'static': StaticSitemap
+}
 
 urlpatterns = [
     path('', include('fishr.urls')),
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
+    path('sitemap.xml', sitemap, { 'sitemaps': sitemaps }, name='django.contrib.sitemaps.views.sitemap'),
 ]
+
+handler403 = 'fishr.views.handle_403'
+handler404 = 'fishr.views.handle_404'
+handler400 = 'fishr.views.handle_400'
+handler500 = 'fishr.views.handle_500'

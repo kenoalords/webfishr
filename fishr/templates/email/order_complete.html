@@ -1,0 +1,19 @@
+{% extends './base.html' %}
+{% load humanize %}
+{% block content %}
+    <h1>Hello {{ order.user.first_name }},</h1>
+    <h3>Congratulation!!! Your order payment was successful.</h3>
+    <p>Your order details are as follows;</p>
+    <ul>
+        <li>Package: {{ order.package.title }} Package</li>
+        <li>Theme: {{ order.theme.title }}</li>
+        <li>Domain: {{ order.domain_name }}</li>
+        <li>Amount: N{{ order.amount|intcomma }}</li>
+    </ul>
+    <p>We look forward to receiving your website information as soon as possible in other to commence your work.</p>
+    <br>
+    <strong>BR.</strong>
+    <p>
+        <strong>{{ current_site.name }} Team</strong>
+    </p>
+{% endblock %}

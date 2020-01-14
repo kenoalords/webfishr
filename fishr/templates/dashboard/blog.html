@@ -1,0 +1,72 @@
+{% extends './base.html' %}
+{% load humanize static %}
+{% block content %}
+    {% include './includes/messages.html' %}
+    <div class="box">
+
+    <div class="level is-mobile">
+        <div class="level-left">
+            <div class="level-item">
+                <h2 class="title is-3 is-size-4-mobile has-text-weight-bold">Blog</h2>
+            </div>
+        </div>
+        <div class="level-right">
+            <div class="level-item">
+                <a href="{% url 'blog_add' %}" class="button is-rounded is-primary is-small">Add new</a>
+            </div>
+        </div>
+    </div>
+    <hr>
+    {% if blogs %}
+
+        <div class="blogs">
+            {% for blog in blogs %}
+                <div class="blog columns is-mobile">
+                    <div class="column is-2">
+                        {% if blog.image %}
+                        <figure class="image">
+                            <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+                        </figure>
+                        {% endif %}
+                    </div>
+                    <div class="column is-10 content">
+                        <h2 class="title is-3 is-size-4-mobile">
+                            <a href="{% url 'blog' pk=blog.pk slug=blog.slug %}">{{ blog.title }}</a>
+                        </h2>
+                        <p>
+                            {{ blog.excerpt }}
+                        </p>
+                        <p class="date">Created at: {{ blog.created_at }} | Updated at: {{ blog.updated_at }}</p>
+
+                        <div class="meta level is-mobile">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    {% if blog.is_public %}
+                                        <span class="tag is-rounded is-success">
+                                            <span class="icon"><i class="fas fa-check"></i></span>
+                                            <span>Public</span>
+                                        </span>
+                                    {% else %}
+                                        <span class="tag is-rounded is-danger">
+                                            <span class="icon"><i class="fas fa-times"></i></span>
+                                            <span>In Draft</span>
+                                        </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="level-right">
+                                <div class="level-item">
+                                    <a href="{% url 'blog_edit' pk=blog.pk %}" class="button is-small is-rounded is-link">Edit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% else %}
+        <p class="has-text-danger">You have not posted any blog post</p>
+    {% endif %}
+    </div>
+{% endblock %}

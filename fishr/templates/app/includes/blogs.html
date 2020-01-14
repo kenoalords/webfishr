@@ -1,0 +1,23 @@
+{% if blogs %}
+
+<div class="columns is-multiline blog-list">
+    {% for blog in blogs %}
+        <div class="column is-4 blog" id="blog-{{ blog.pk }}">
+            <div class="box">
+                {% if blog.image %}
+                <figure class="image">
+                    <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+                </figure>
+                {% endif %}
+                <div class="content">
+                    <p class="date">{{ blog.created_at|date:'jS M, Y' }}</p>
+                    <h3 class="title is-4 has-text-weight-bold">
+                        <a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endif %}

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
-from fishr.models import Order, Package, Theme, EmailSubscription
+from fishr.models import Order, Package, Theme, EmailSubscription, Blog
 from django.utils.safestring import mark_safe
 from django.core.validators import ValidationError
 from django.utils.translation import gettext_lazy as _
@@ -50,3 +50,16 @@ class EmailSubscriptionForm(forms.ModelForm):
 	class Meta:
 		model = EmailSubscription
 		fields = ['email']
+
+
+# Blog form
+class BlogForm(forms.ModelForm):
+	title = forms.CharField(label='', widget=forms.TextInput(attrs={ 'class': 'input', 'placeholder': 'Enter blog title' }))
+	content = forms.CharField(label='', widget=forms.Textarea(attrs={ 'class': 'textarea', 'placeholder': 'Enter blog content' }))
+	slug = forms.CharField(label='', widget=forms.TextInput(attrs={ 'class': 'input', 'placeholder': 'Provide slug' }))
+	excerpt = forms.CharField(label='', widget=forms.Textarea(attrs={ 'class': 'textarea', 'placeholder': 'Enter blog title', 'rows': 2 }))
+	is_public = forms.CharField(required=False, widget=forms.CheckboxInput())
+	image = forms.ImageField(required=False)
+	class Meta:
+		model = Blog
+		fields = ['title', 'content', 'slug', 'excerpt', 'image', 'is_public']

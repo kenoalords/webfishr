@@ -5,6 +5,9 @@
         <title>{% block head_title %}{% endblock %}</title>
         {% block extra_head %}
         {% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta charset="UTF-8">
         <link rel="stylesheet" href="{% static 'dist/app.css' %}">
         <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
     </head>

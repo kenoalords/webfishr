@@ -3,12 +3,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{% static 'dist/app.css' %}">
     <link rel="stylesheet" href="{% static 'dist/css/all.min.css' %}">
     {% include 'meta/meta.html' %}
 </head>
+
 <body>
     {% include './includes/header.html' %}
 
@@ -20,5 +21,7 @@
     </div>
 
     {% include '../app/includes/footer.html' %}
+    <script type="text/javascript" src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
+    <script type="text/javascript" src="{% static 'dist/app.js' %}?v=1.1"></script>
 </body>
 </html>

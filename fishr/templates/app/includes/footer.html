@@ -8,23 +8,7 @@
                 </figure>
             </div>
             <div class="column is-6 is-offset-1">
-                <h3 class="title is-3 has-text-weight-bold">
-                    Get discounts and all the fun stuffs directly to your mailbox.
-                </h3>
-                <p class="subtitle">Subscribe today for monthly updates</p>
-                {% if email_form %}
-                <form action="{% url 'subscribe-email' %}" method="post" id="email-subscription-footer">
-                    {% csrf_token %}
-                    <div class="field has-addons">
-                        <p class="control">
-                            {{ email_form.email }}
-                        </p>
-                        <p class="control">
-                            <button class="button is-warning is-rounded">Subscribe</button>
-                        </p>
-                    </div>
-                </form>
-                {% endif %}
+                {% include './newsletter_form.html' %}
             </div>
         </div>
     </div>
@@ -46,9 +30,9 @@
             <div class="column">
                 <h4 class="title is-4 has-text-white has-text-weight-bold">Resource</h4>
                 <ul class="menu">
-                    <li><a href="{% url 'themes' %}?utm_source=footer">Blog</a></li>
+                    <li><a href="{% url 'blogs' %}?utm_source=footer">Blog</a></li>
                     <li><a href="{% url 'career' %}?utm_source=footer">Career</a></li>
-                    <li><a href="{% url 'signup' %}?utm_source=footer">News &amp; Updates</a></li>
+                    <!-- <li><a href="{% url 'signup' %}?utm_source=footer">News &amp; Updates</a></li> -->
                 </ul>
             </div>
             <div class="column">
@@ -66,9 +50,9 @@
                 <p>We know you might have lots of question so feel free to reach out to us.</p>
                 <div class="social-icons buttons">
                     <a href="mailto:web@webfishr.com" class="button is-warning is-rounded is-small"><i class="fas fa-envelope"></i></a>
-                    <a href="#" class="button is-warning is-rounded is-small"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="button is-warning is-rounded is-small"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="button is-warning is-rounded is-small"><i class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com/webfishrng" class="button is-warning is-rounded is-small"><i class="fab fa-instagram"></i></a>
+                    <!-- <a href="#" class="button is-warning is-rounded is-small"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="button is-warning is-rounded is-small"><i class="fab fa-twitter"></i></a> -->
                 </div>
             </div>
         </div>
@@ -77,3 +61,28 @@
         </div>
     </div>
 </footer>
+<div class="modal" id="newsletter-modal">
+    <div class="modal-background"></div>
+    <div class="modal-body is-small">
+        <div class="box">
+            <figure class="image newsletter">
+                <img src="{% static 'images/newsletter-2.png' %}" alt="Enjoy amazing discounts">
+            </figure>
+            <hr>
+            <div class="modal-form-wrapper"></div>
+            <a href="#" class="close-modal" class="has-text-light">Maybe later</a>
+        </div>
+    </div>
+    <button class="modal-close is-large close-modal"></button>
+</div>
+{% if is_debug == False %}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156096583-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-156096583-1');
+    </script>
+{% endif %}

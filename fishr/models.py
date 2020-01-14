@@ -3,6 +3,8 @@ from django.shortcuts import reverse
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 import uuid
+from .managers import BlogPublishedManager
+from django.conf.urls.static import static
 
 # Create your models here.
 class Category(models.Model):
@@ -92,7 +94,7 @@ class Product(models.Model):
 class Testimonial(models.Model):
     name = models.CharField(max_length=32)
     title = models.CharField(max_length=32, blank=True)
-    testimonial = models.CharField(max_length=256)
+    testimonial = models.TextField()
     avatar = models.ImageField(upload_to="avatar")
     order = models.IntegerField(default=10)
     is_visible = models.BooleanField(default=False)
@@ -106,7 +108,7 @@ class Testimonial(models.Model):
 
 class Faq(models.Model):
     question = models.CharField(max_length=128)
-    answer = models.CharField(max_length=1024)
+    answer = models.TextField()
     order = models.IntegerField(default=10)
     date = models.DateTimeField(auto_now_add=True)
 
@@ -145,6 +147,43 @@ class PollOptions(models.Model):
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
     option = models.CharField(max_length=128)
     votes = models.IntegerField()
+
+
+class Blog(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=164)
+    slug = models.SlugField(max_length=164)
+    content = models.TextField()
+    excerpt = models.CharField(max_length=160)
+    image = models.ImageField(upload_to="blog", null=True)
+    is_public = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = models.Manager()
+    public = BlogPublishedManager()
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('blog', kwargs={ 'pk': self.pk, 'slug': self.slug })
+
+    @property
+    def get_image(self):
+        try:
+            return self.image.url
+        except Exception as e:
+            return '/static/images/no-blog-post.png'
+
+    class Meta:
+        ordering = ['-updated_at']
+
+
+
+
+
+
+
 
 
 

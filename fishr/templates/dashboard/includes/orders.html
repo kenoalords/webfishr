@@ -1,0 +1,46 @@
+{% load humanize %}
+{% if orders %}
+    <section id="orders">
+    {% for order in orders %}
+
+        <div class="columns is-multiline is-aligned-center order">
+            <div class="column is-4">
+                <figure class="image">
+                    <img src="{{ order.theme.image.url }}" alt="{{ order.theme.title }}">
+                </figure>
+            </div>
+            <div class="column is-8">
+                <h2 class="title is-3 has-text-weight-bold">{{ order.package.title }} Package</h2>
+                <ul>
+                    <li>{{ order.domain_name }}</li>
+                    <li>N{{ order.amount|intcomma }}</li>
+                    <li>{{ order.date|date:'jS M, Y' }}</li>
+                    <li>{% if order.is_paid == True %}
+                            <span class="has-text-success">
+                                <span class="icon"><i class="fas fa-check fa-sm"></i></span>
+                                <span>Paid</span>
+                            </span>
+                        {% else %}
+                            <a href="{{ order.get_absolute_url }}" class="has-text-danger">
+                                <span class="icon"><i class="fas fa-exclamation-triangle fa-sm"></i></span>
+                                <span>Make payment</span>
+                            </a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    {% endfor %}
+    </section>
+{% else %}
+<hr>
+<p>
+    You have not signed up for any of our website packages. <a href="mailto:web@webfishr.com?subject=I+need+help!">Contact us now</a> if you are having troubles deciding which package works best for your needs.
+</p>
+<div>
+    <div class="buttons">
+        <a href="{% url 'themes' %}" class="button is-link">Browse website themes</a>
+        <a href="{% url 'pricing' %}" class="button is-link">View packages</a>
+    </div>
+</div>
+{% endif %}

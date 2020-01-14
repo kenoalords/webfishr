@@ -1,0 +1,27 @@
+{% if blogs %}
+
+{% for blog in blogs %}
+    <div class="column is-4 blog" id="blog-{{ blog.pk }}">
+        <div class="box">
+            <a href="{{ blog.get_absolute_url }}">
+                <figure class="image" style="background: url({{ blog.get_image }}) no-repeat center; background-size: cover">
+                    <img src="{{ blog.get_image }}" alt="{{ blog.title }}">
+                </figure>
+            </a>
+            <div class="content">
+                <p class="date">{{ blog.created_at|date:'jS M, Y' }}</p>
+                <h3 class="title is-4 has-text-weight-bold">
+                    <a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a>
+                </h3>
+                <p class="is-marginless">
+                    <a href="{{ blog.get_absolute_url }}" class="read-more tag is-primary is-rounded">
+                        <span>Read more</span>
+                        <span class="icon"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+{% endif %}

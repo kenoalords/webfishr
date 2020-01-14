@@ -64,13 +64,45 @@ def send_order_notification(email, uuid):
     text = email_body_text.format(order.user.first_name, order.package.title, int(order.amount), link, site_name)
     email = EmailMultiAlternatives(
                     to=[email,],
-                    subject='Your Order Details',
+                    subject='Hello %s, View Your Order Details',
                     body= text
                 )
     email.attach_alternative(email_body, 'text/html')
     email.send()
 
+    admin_email_body = """
+                            Hello Admin,
+
+                            %s placed an order for %s package
+                            Order Amount: N%s
+
+                            Thank you
+                        """
+    admin_body = admin_email_body % ( order.user.first_name, order.package.title, int(order.amount) )
+    admin_email = EmailMessage(to=['web@webfishr.com', 'kenoalords@gmail.com'], subject='New order from %s' % order.user.first_name, body=admin_body)
+    admin_email.send()
+
 @shared_task
-def send_allauth_email(msg):
-    obj = deserialize(msg)
-    obj.send()
+def send_order_payment_notification(uuid):
+    order = Order.objects.get(uuid=uuid)
+    email_body = render_to_string('email/order_complete.html', context={ 'uuid': uuid, 'current_site': SITE, 'order': order })
+    email_body_text = """
+                        Hello %s,
+
+                        Congratulation!!! Your order payment was successful.
+                        Your order details are as follows;
+                        Package: %s
+                        Theme: %s
+                        Domain: %s
+                        Amount: N%s
+
+                        We look forward to receiving your website information as soon as possible in other to commence your work.
+
+                        BR.
+
+                        %s Team
+                    """
+    text = email_body_text % (order.user.first_name, order.package.title, order.theme.title, order.domain_name, order.amount, SITE.name)
+    email = EmailMultiAlternatives(to=[order.user.email,], subject='%s your order is complete!' % order.user.first_name, body=text)
+    email.attach_alternative(email_body, 'text/html')
+    email.send()

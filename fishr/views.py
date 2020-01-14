@@ -1,8 +1,8 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, render_to_response
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from django.views.generic import TemplateView, DetailView, View
+from django.views.generic import TemplateView, DetailView, View, ListView
 from django.db import IntegrityError
 from meta.views import Meta
 from formtools.wizard.views import SessionWizardView, NamedUrlSessionWizardView
@@ -10,12 +10,15 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.conf import settings
+from django.template import RequestContext
 import requests, json
 
 # App Imports
-from fishr.forms import PackageForm, ThemeForm, DomainForm, PaymentForm, EmailSubscriptionForm
-from fishr.models import Theme, Package, Order, Faq, EmailSubscription
-from .tasks import send_subscription_email, send_order_notification
+from fishr.forms import PackageForm, ThemeForm, DomainForm, PaymentForm, EmailSubscriptionForm, BlogForm
+from fishr.models import Theme, Package, Order, Faq, EmailSubscription, Blog
+from .tasks import send_subscription_email, send_order_notification, send_order_payment_notification
+from .mixins import SuperUserMixin, BlogPublicMixin
+
 
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
@@ -306,6 +309,7 @@ class PaystackCallback(LoginRequiredMixin, TemplateView):
                     order.transaction_ref = ref
                     order.amount_paid = amount
                     order.save()
+                    send_order_payment_notification(order.uuid)
                     messages.success(request, 'Your payment was successful. We will start processing your order immediately')
                     return HttpResponseRedirect(reverse('dashboard'))
         else:
@@ -313,6 +317,93 @@ class PaystackCallback(LoginRequiredMixin, TemplateView):
             return HttpResponseRedirect(reverse('index'))
 
 
+
+# Blog views
+class BlogListView(LoginRequiredMixin, SuperUserMixin, ListView):
+    template_name = 'dashboard/blog.html'
+    model = Blog
+    context_object_name = 'blogs'
+
+class BlogAddTemplateView(LoginRequiredMixin, SuperUserMixin, TemplateView):
+    template_name = 'dashboard/blog_form.html'
+
+    def get(self, request, *args, **kwargs):
+        form = BlogForm()
+        return render(request, self.template_name, context={ 'form': form })
+
+    def post(self, request, *args, **kwargs):
+        form = BlogForm(request.POST, request.FILES)
+        if form.is_valid():
+            blog = form.save(commit=False)
+            blog.user = request.user
+            blog.save()
+            messages.success(request, 'Blog post saved successfully')
+            return HttpResponseRedirect(reverse('admin_blog'))
+        else:
+            return render(request, self.template_name, context={ 'form': form })
+
+
+class BlogEditTemplateView(LoginRequiredMixin, SuperUserMixin, TemplateView):
+    template_name = 'dashboard/blog_edit_form.html'
+
+    def get(self, request, *args, **kwargs):
+        blog = Blog.objects.get(pk=kwargs['pk'])
+        form = BlogForm(instance=blog)
+        return render(request, self.template_name, context={ 'form': form, 'blog': blog })
+
+    def post(self, request, *args, **kwargs):
+        blog = Blog.objects.get(pk=kwargs['pk'])
+        form = BlogForm(request.POST, request.FILES)
+        if form.is_valid():
+            blog.title = form.cleaned_data['title']
+            blog.slug = form.cleaned_data['slug']
+            blog.content = form.cleaned_data['content']
+            blog.excerpt = form.cleaned_data['excerpt']
+            blog.is_public = form.cleaned_data['is_public']
+            if request.FILES.get('image', False):
+                blog.image = form.cleaned_data['image']
+            blog.save()
+            messages.success(request, 'Blog post updated successfully')
+            return HttpResponseRedirect(reverse('admin_blog'))
+        else:
+            return render(request, self.template_name, context={ 'form': form, 'blog': blog })
+
+
+# Blog view template
+class BlogDetailView(BlogPublicMixin, DetailView):
+    model = Blog
+    template_name = 'app/blog_single.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['blogs'] = Blog.public.exclude(pk=self.object.pk)
+        context['meta'] = Meta(title=self.object.title, description=self.object.excerpt)
+        return context
+
+class BlogPageListView(ListView):
+    template_name = 'app/blogs.html'
+    context_object_name = 'blogs'
+    queryset = Blog.public.all()
+
+def handle_403(request, exception):
+    response = render_to_response('errors/403.html')
+    response.status_code = 403
+    return response
+
+def handle_400(request, exception):
+    response = render_to_response('errors/400.html')
+    response.status_code = 400
+    return response
+
+def handle_500(request):
+    response = render_to_response('errors/500.html')
+    response.status_code = 500
+    return response
+
+def handle_404(request, exception):
+    response = render_to_response('errors/404.html')
+    response.status_code = 404
+    return response
 
 
 

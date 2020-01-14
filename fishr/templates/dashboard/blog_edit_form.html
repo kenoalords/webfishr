@@ -1,0 +1,47 @@
+{% extends './base.html' %}
+{% load humanize static %}
+{% block content %}
+    {% include './includes/messages.html' %}
+    <div class="box">
+    <h2 class="title is-4 is-size-4-mobile has-text-weight-bold">New blog post</h2>
+    <hr>
+
+    <form action="{% url 'blog_edit' pk=blog.pk %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_form_error }}
+        <div class="field">
+            <label for="{{ form.title.id_for_label }}">Title</label>
+            {{ form.title }}
+            <span class="help is-danger">{{ form.title.errors }}</span>
+        </div>
+        <div class="field">
+            <label for="{{ form.content.id_for_label }}">Body</label>
+            {{ form.content }}
+            <span class="help is-danger">{{ form.content.errors }}</span>
+        </div>
+        <div class="field">
+            <label for="{{ form.except.id_for_label }}">Meta Description</label>
+            {{ form.excerpt }}
+            <span class="help is-danger">{{ form.excerpt.errors }}</span>
+        </div>
+        <div class="field">
+            <label for="{{ form.slug.id_for_label }}">URL Slug (use dashes - to seperate words)</label>
+            {{ form.slug }}
+            <span class="help is-danger">{{ form.slug.errors }}</span>
+        </div>
+        <div class="field">
+            <label for="{{ form.image.id_for_label }}">Image</label>
+            {{ form.image }}
+            <span class="help is-danger">{{ form.image.errors }}</span>
+        </div>
+        <hr>
+        <div class="field">
+            <label for="{{ form.is_public.id_for_label }}">{{ form.is_public }} Mark this post as public</label>
+            <span class="help is-danger">{{ form.is_public.errors }}</span>
+        </div>
+        <div class="field">
+            <button type="submit" class="button is-primary is-rounded">Save blog post</button>
+        </div>
+    </form>
+    </div>
+{% endblock %}
