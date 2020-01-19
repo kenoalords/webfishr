@@ -179,6 +179,7 @@ class OrderWizardView(LoginRequiredMixin, SessionWizardView):
         package = form_dict['package'].cleaned_data['package']
         domain_name = form_dict['domain'].cleaned_data['domain_name']
         payment_type = form_dict['payment'].cleaned_data['type']
+        is_domain_owner = form_dict['domain'].cleaned_data['is_domain_owner']
 
         # Add order
         # amount = Package.objects.get(pk=)
@@ -187,6 +188,7 @@ class OrderWizardView(LoginRequiredMixin, SessionWizardView):
             package= package,
             theme= theme,
             domain_name=domain_name,
+            is_domain_owner=is_domain_owner,
             payment_type=payment_type,
             amount=package.sale_price
         )

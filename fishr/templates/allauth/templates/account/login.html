@@ -7,7 +7,7 @@
 
 {% block content %}
 
-<h1 class="title is-3 is-size-5-mobile is-bold">{% trans "Login" %}</h1>
+<h1 class="title is-3 is-size-4-mobile has-text-weight-bold">{% trans "Login" %}</h1>
 
 {% get_providers as socialaccount_providers %}
 
@@ -17,12 +17,14 @@
   {% csrf_token %}
 
   <div class="field">
+      <label for="{{ form.login.id_for_label }}">Email address</label>
       {{ form.login }}
       {% if form.login.errors %}
           <span class="help is-danger">{{ form.login.errors }}</span>
       {% endif %}
   </div>
   <div class="field">
+      <label for="{{ form.password.id_for_label }}">Password</label>
       {{ form.password }}
       {% if form.password.errors %}
           <span class="help is-danger">{{ form.password.errors }}</span>
@@ -45,7 +47,7 @@
       <button class="button is-primary is-fullwidth is-rounded" type="submit">{% trans "Login" %}</button>
   </div>
   <hr>
-  <p>Forgot password? <a class="" href="{% url 'account_reset_password' %}">{% trans "Click here" %}</a></p>
+  <p>Forgot password? <a class="has-text-weight-bold" href="{% url 'account_reset_password' %}">{% trans "Click here" %}</a></p>
 </form>
 
 {% if socialaccount_providers %}
@@ -62,14 +64,14 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p> -->
 </div>
 <hr>
 <p>
-    Don't have an account? <a href="{% url 'account_signup' %}"><span class="is-bold">Create an account</span></a>
+    Don't have an account? <a href="{% url 'account_signup' %}"><span class="has-text-weight-bold">Create an account</span></a>
 </p>
 
 {% include "socialaccount/snippets/login_extra.html" %}
 
 {% else %}
 <p>
-    Don't have an account? <a href="{% url 'account_signup' %}"><span class="is-bold">Create an account</span></a>
+    Don't have an account? <a href="{% url 'account_signup' %}"><span class="has-text-weight-bold">Create an account</span></a>
 </p>
 {% endif %}
 

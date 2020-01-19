@@ -10,8 +10,8 @@ from captcha.widgets import ReCaptchaV3
 class CustomLoginForm(LoginForm):
     def __init__(self, *args, **kwargs):
         super(CustomLoginForm, self).__init__(*args, **kwargs)
-        self.fields['login'].widget = forms.TextInput(attrs={'class': 'input', 'placeholder': 'Username or Email Address'})
-        self.fields['password'].widget = forms.PasswordInput(attrs={'class': 'input', 'placeholder': 'Password'})
+        self.fields['login'].widget = forms.TextInput(attrs={'class': 'input'})
+        self.fields['password'].widget = forms.PasswordInput(attrs={'class': 'input'})
         self.fields['captcha'] = ReCaptchaField(widget=ReCaptchaV3)
         self.fields['password'].label = ''
         self.fields['login'].label = ''
@@ -27,12 +27,12 @@ class CustomSignupForm(SignupForm):
     error_css_class = 'is-danger'
     def __init__(self, *args, **kwargs):
         super(CustomSignupForm, self).__init__(*args, **kwargs)
-        self.fields['first_name'] = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'First name'}))
-        self.fields['last_name'] = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'placeholder': 'Last name'}))
+        self.fields['first_name'] = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
+        self.fields['last_name'] = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
         self.fields['captcha'] = ReCaptchaField(widget=ReCaptchaV3)
-        self.fields['email'].widget = forms.TextInput(attrs={'class': 'input', 'placeholder': 'Email Address'})
-        self.fields['password1'].widget = forms.PasswordInput(attrs={'class': 'input', 'placeholder': 'Password'})
-        self.fields['password2'].widget = forms.PasswordInput(attrs={'class': 'input', 'placeholder': 'Confirm password'})
+        self.fields['email'].widget = forms.TextInput(attrs={'class': 'input'})
+        self.fields['password1'].widget = forms.PasswordInput(attrs={'class': 'input'})
+        self.fields['password2'].widget = forms.PasswordInput(attrs={'class': 'input'})
 
         self.fields['password1'].label = ''
         self.fields['password2'].label = ''

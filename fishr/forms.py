@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django import forms
+from django.contrib.humanize.templatetags.humanize import intcomma
 from fishr.models import Order, Package, Theme, EmailSubscription, Blog
 from django.utils.safestring import mark_safe
 from django.core.validators import ValidationError
@@ -7,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 
 class PackageModelChoiceField(forms.ModelChoiceField):
 	def label_from_instance(self, obj):
-		return mark_safe( '<div><h4 class="title is-3 is-size-4-mobile has-text-weight-bold is-marginless">%s</h4><div><span class="cost has-text-weight-bold has-text-success">N%s</span> <del class="has-text-light">N%s</del></div></div>' % (obj.title, obj.sale_price, obj.regular_price) )
+		return mark_safe( '<div><h4 class="title is-3 is-size-4-mobile has-text-weight-bold is-marginless">%s</h4><div><span class="cost has-text-weight-bold has-text-success">₦%s</span> <del class="has-text-light">N%s</del></div></div>' % (obj.title, intcomma(obj.sale_price), obj.regular_price) )
 
 class ThemeModelChoiceField(forms.ModelChoiceField):
 	def label_from_instance(self, obj):
@@ -33,8 +34,9 @@ def validate_user_email(value):
 		raise ValidationError( _('%(value)s is already registered. Please login to continue with your order'), params={ 'value': value } )
 
 class DomainForm(forms.Form):
-	domain_name = forms.CharField(label="Enter your domain name", widget=forms.TextInput(attrs={ 'class': 'input', 'placeholder': 'www.mycompany.com' }))
-	tos = forms.BooleanField(label="Agree to our terms and condition", widget=forms.CheckboxInput(), error_messages={ 'required': 'Please agree to our terms and condition' })
+	domain_name = forms.CharField(label="Enter your domain name", widget=forms.TextInput(attrs={ 'class': 'input', 'placeholder': 'www.mycompanyname.com' }))
+	is_domain_owner = forms.BooleanField(label='Check this box if you currently own this domain', widget=forms.CheckboxInput())
+	tos = forms.BooleanField(label="I agree to your terms and condition", widget=forms.CheckboxInput(), error_messages={ 'required': 'Please agree to our terms and condition' })
 	error_css_class = 'is-danger'
 
 PAYMENT_CHOICES = (

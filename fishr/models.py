@@ -46,6 +46,7 @@ class Theme(models.Model):
     title = models.CharField(max_length=32)
     image = models.ImageField(upload_to="themes")
     slug = models.SlugField(max_length=32, blank=True)
+    description = models.TextField(blank=True)
     featured = models.BooleanField(default=False)
     date = models.DateTimeField(auto_now_add=True)
 
@@ -70,6 +71,7 @@ class Order(models.Model):
     transaction_ref = models.CharField(max_length=1024, blank=True)
     payment_type = models.CharField(choices=(('online', 'Online Payment'), ('transfer', 'Bank Transfer')), max_length=12)
     is_paid = models.BooleanField(default=False)
+    is_domain_owner = models.BooleanField(default=False)
     is_service_active = models.BooleanField(default=False)
     expiry = models.DateField(blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True)

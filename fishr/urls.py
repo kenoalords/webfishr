@@ -3,6 +3,7 @@ import fishr.views as view
 from django.conf import settings
 from django.conf.urls.static import static
 from fishr.views import is_user_loggedin
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', view.IndexView.as_view(), name='index'),
@@ -15,6 +16,7 @@ urlpatterns = [
     path('how-it-works/', view.HowItWorksTemplateView.as_view(template_name="app/how-it-works.html"), name='how-it-works'),
     path('signup/', view.OrderWizardView.as_view(), name="signup"),
     path('faq/', view.FaqTemplateView.as_view(), name="faq"),
+    path('terms-condition/', TemplateView.as_view(template_name='app/terms.html'), name="terms"),
     path('order/<str:uuid>/', view.OrderCompleteView.as_view(), name="order"),
     path('order/paystack/callback/', view.PaystackCallback.as_view(), name="paystack_callback"),
     path('website-design/', view.WebsiteThemeView.as_view(), name="themes"),

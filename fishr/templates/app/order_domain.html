@@ -15,23 +15,29 @@
 
                 <div class="columns is-centered profile-details">
                     <div class="column is-7">
-                        <h2 class="title is-3 is-size-4-mobile has-text-weight-bold has-text-centered">Provide your details</h2>
+                        <h2 class="title is-3 is-size-4-mobile has-text-weight-bold has-text-centered">Provide your domain details</h2>
                         <hr>
                         {{ wizard.form.non_field_error }}
                         <div class="field">
                             <h4 class="title is-4 has-text-weight-bold">Domain name</h4>
                             {{ wizard.form.domain_name }}
-                            <span class="help">This can be a domain name you already own or one you like to register. e.g <strong>www.mycompanyname.com</strong></span>
+                            <p class="help is-danger">Domain names are subject to availability. If this is a new website, <a href="https://www.namecheap.com/domains/" target="_blank">Click here to find out if the domain is available</a></p>
+                            <span class="help">You can provide a domain name you already own or a new one you'd like us to register and manage for you. e.g <strong>www.mycompanyname.com</strong></span>
                             <span class="help is-danger">{{ wizard.form.domain_name.errors }}</span>
+                        </div>
+                        <div class="field">
+                            <label for="{{ wizard.form.is_domain_owner.id_for_label }}">
+                                {{ wizard.form.is_domain_owner }} Check this box if you currently own this domain
+                            </label>
                         </div>
                         <hr>
 
 
                         <div class="field">
-                            <label for="{{ wizard.form.tos.id_for_label }}">
+                            <div><label for="{{ wizard.form.tos.id_for_label }}">
                                 {{ wizard.form.tos }}
-                                {{ wizard.form.tos.label }}
                             </label>
+                            <span>I agree to your <a href="{% url 'terms' %}" target="_blank">terms and conditions <span class="icon"><i class="fas fa-link"></i></span></a></span></div>
                             <span class="help is-danger">{{ wizard.form.tos.errors }}</span>
                         </div>
                     </div>

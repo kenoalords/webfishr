@@ -74,7 +74,7 @@
     </div>
 </section>
 
-<section class="section is-small-image-mobile is-medium">
+<section class="section is-small-image-mobile">
     <div class="container">
         <div class="columns is-aligned-center is-flipped-mobile">
 
@@ -90,58 +90,6 @@
             <div class="column is-5 is-offset-1">
                 <figure class="image">
                     <img src="{% static 'images/business.png' %}" alt="Spend less time explaining what you do">
-                </figure>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-
-<section class="section is-small-image-mobile">
-    <div class="container">
-        <div class="columns is-aligned-center">
-
-
-            <div class="column is-5">
-                <figure class="image">
-                    <img src="{% static 'images/managment.png' %}" alt="Lets design and manage your website">
-                </figure>
-            </div>
-
-            <div class="column is-6 is-offset-1">
-                <h2 class="title has-text-weight-light is-2">
-                    Enjoy the convenience of having seasoned experts manage your online presence.
-                </h2>
-                <p>
-                    Have the freedom to focus on your business while we get our hands down and dirty with all you technical jargons you shouldn't care about.
-                </p>
-                <p>
-                    <a href="{% url 'themes' %}" class="button is-rounded is-primary">Choose your website</a>
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="section is-small-image-mobile is-medium">
-    <div class="container">
-        <div class="columns is-aligned-center is-flipped-mobile">
-            <div class="column is-6">
-                <h2 class="title has-text-weight-light is-2">
-                    Get affordable website packages at the cost of a smartphone.
-                </h2>
-                <p>You don't have to rob a bank to pay for a professional online presence.</p>
-                <p>Find the right website package within your budget and take control of your online presence today.</p>
-                <p>It is that easy!</p>
-                <p>
-                    <a href="{% url 'pricing' %}" class="button is-primary is-rounded">Choose a package</a>
-                </p>
-            </div>
-            <div class="column is-5 is-offset-1">
-                <figure class="image">
-                    <img src="{% static 'images/package.png' %}" alt="affordable website design packages">
                 </figure>
             </div>
         </div>
@@ -172,8 +120,63 @@
     <div class="container">
         <div class="has-text-centered columns is-centered" style="margin-bottom: 2em">
             <div class="column is-7">
-                <h3 class="title has-text-weight-bold is-2 has-text-centered">Your website. Your price.</h3>
-                <p class="subtitle">Choose a package that best fits your budget and suits your needs</p>
+                <h3 class="title has-text-weight-bold is-2 has-text-centered">Your new website awaits</h3>
+                <p class="subtitle">Browse our beautiful collections of website designs</p>
+            </div>
+        </div>
+        {% include './includes/themes.html' %}
+    </div>
+</div>
+<section class="section is-small-image-mobile is-medium">
+    <div class="container">
+        <div class="columns is-aligned-center is-flipped-mobile">
+            <div class="column is-6">
+                <h2 class="title has-text-weight-light is-2">
+                    Get affordable website packages at the cost of a smartphone.
+                </h2>
+                <p>You don't have to rob a bank to pay for a professional online presence.</p>
+                <p>Find the right website package within your budget and take control of your online presence today.</p>
+                <p>It is that easy!</p>
+                <p>
+                    <a href="{% url 'pricing' %}" class="button is-primary is-rounded">Choose a package</a>
+                </p>
+            </div>
+            <div class="column is-5 is-offset-1">
+                <figure class="image">
+                    <img src="{% static 'images/package.png' %}" alt="affordable website design packages">
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section is-small-image-mobile">
+    <div class="container">
+        <div class="columns is-aligned-center">
+            <div class="column is-5">
+                <figure class="image">
+                    <img src="{% static 'images/managment.png' %}" alt="Lets design and manage your website">
+                </figure>
+            </div>
+            <div class="column is-6 is-offset-1">
+                <h2 class="title has-text-weight-light is-2">
+                    Enjoy the convenience of having seasoned experts manage your online presence.
+                </h2>
+                <p>
+                    Have the freedom to focus on your business while we get our hands down and dirty with all you technical jargons you shouldn't care about.
+                </p>
+                <p>
+                    <a href="{% url 'themes' %}" class="button is-rounded is-primary">Choose your website</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="section is-medium is-light">
+    <div class="container">
+        <div class="has-text-centered columns is-centered" style="margin-bottom: 2em">
+            <div class="column is-7">
+                <h3 class="title has-text-weight-bold is-2 has-text-centered">Your Website . Your Budget</h3>
+                <p class="subtitle">Choose the right package that fits your budget.</p>
             </div>
         </div>
         {% include './includes/packages.html' %}

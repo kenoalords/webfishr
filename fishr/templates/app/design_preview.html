@@ -9,6 +9,15 @@
             <h1 class="title is-2 is-size-4-mobile has-text-weight-bold">
                 {{ theme.title }}
             </h1>
+            {% if theme.description %}
+                <div class="content">
+                    <div class="columns is-centered">
+                        <div class="column is-7">
+                            {{ theme.description|safe }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
             <figure class="image">
                 <img src="{{ theme.image.url }}" alt="{{ theme.title }}">
             </figure>
@@ -18,7 +27,7 @@
 <div class="section is-medium">
     <div class="container">
         <div class="has-text-centered">
-            <h2 class="title is-3 has-text-weight-bold">Checkout these other website designs</h2>
+            <h2 class="title is-3 has-text-weight-bold">More website designs to choose from</h2>
         </div>
         <hr>
         {% include './includes/themes.html' %}
