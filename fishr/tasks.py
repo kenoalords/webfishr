@@ -64,7 +64,7 @@ def send_order_notification(email, uuid):
     text = email_body_text.format(order.user.first_name, order.package.title, int(order.amount), link, site_name)
     email = EmailMultiAlternatives(
                     to=[email,],
-                    subject='Hello %s, View Your Order Details',
+                    subject='Hello %s, View Your Order Details' % order.user.first_name.capitalize(),
                     body= text
                 )
     email.attach_alternative(email_body, 'text/html')
