@@ -1,4 +1,5 @@
 node_modules/
+fishr/migrations
 media/
 assets/
 webfishr/settings.py

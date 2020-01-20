@@ -1,6 +1,6 @@
 {% if themes %}
     {% load humanize %}
-    <div class="columns is-multiline themes is-mobile">
+    <div class="columns is-multiline themes is-mobile {% if slick == 'yes' %}has-slick{% endif %}">
     {% for theme in themes %}
         <div class="column theme is-one-third-desktop is-half-touch">
             <div class="box">
