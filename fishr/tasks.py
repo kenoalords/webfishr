@@ -21,7 +21,7 @@ def send_subscription_email(email, uuid):
                     Hello,
 
                     Thank you for joining our awesome mailing list.
-                    Please copy and paste the link below into your browser to activate your email.
+                    Please copy and paste the link below into your browser to activate your subscription.
 
                     {0}
 
@@ -31,7 +31,7 @@ def send_subscription_email(email, uuid):
     text = email_body_text.format(link, site_name)
     email = EmailMultiAlternatives(
                     to=[email,],
-                    subject='🔔Activate your email!',
+                    subject='Complete your newsletter subscription!',
                     body= text
                 )
     email.attach_alternative(email_body, 'text/html')

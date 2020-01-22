@@ -23,7 +23,19 @@
         </div>
     </div>
 </div>
-<hr>
+<!-- <hr> -->
+
+<div class="section is-medium is-dark">
+    <div class="container">
+        <div class="has-text-centered columns is-centered" style="margin-bottom: 1em">
+            <div class="column is-7">
+                <h3 class="title has-text-weight-bold is-2 has-text-centered has-text-left-mobile">Your new website awaits</h3>
+                <p class="subtitle has-text-left-mobile">Browse our beautiful collections of website designs</p>
+            </div>
+        </div>
+        {% include './includes/themes.html' with slick='yes' %}
+    </div>
+</div>
 
 <section class="section is-small-image-mobile">
     <div class="container">
@@ -97,36 +109,14 @@
 </section>
 
 
-<section class="section is-dark">
-    <div class="container">
-        <div class="columns is-centered">
-            <div class="column is-8 has-text-centered">
-                <h2 class="title has-text-weight-light is-2">Gift your business a professional website and build your clients trust.</h2>
-                <p class="subtitle">Your business will thank you for it</p>
-                <p>
-                    <a href="{% url 'signup' %}" class="button is-warning is-rounded">Sign up today</a>
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="section">
+
+<section class="section is-light">
     <div class="container">
         <h3 class="title has-text-weight-light is-3 has-text-centered">Here is what our clients have to say.</h3>
         {% include './includes/testimonials.html' %}
     </div>
 </section>
-<div class="section is-medium is-light">
-    <div class="container">
-        <div class="has-text-centered columns is-centered" style="margin-bottom: 1em">
-            <div class="column is-7">
-                <h3 class="title has-text-weight-bold is-2 has-text-centered">Your new website awaits</h3>
-                <p class="subtitle">Browse our beautiful collections of website designs</p>
-            </div>
-        </div>
-        {% include './includes/themes.html' with slick='yes' %}
-    </div>
-</div>
+
 <section class="section is-small-image-mobile is-medium">
     <div class="container">
         <div class="columns is-aligned-center is-flipped-mobile">
@@ -166,6 +156,19 @@
                 </p>
                 <p>
                     <a href="{% url 'themes' %}" class="button is-rounded is-primary">Choose your website</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section is-dark">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-8 has-text-centered">
+                <h2 class="title has-text-weight-light is-2">Gift your business a professional website and build your clients trust.</h2>
+                <p class="subtitle">Your business will thank you for it</p>
+                <p>
+                    <a href="{% url 'signup' %}" class="button is-warning is-rounded">Sign up today</a>
                 </p>
             </div>
         </div>
