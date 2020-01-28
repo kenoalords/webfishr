@@ -25,15 +25,19 @@
 </div>
 <!-- <hr> -->
 
-<div class="section is-medium is-dark">
+<div class="section is-medium is-dark" id="index-theme">
     <div class="container">
         <div class="has-text-centered columns is-centered" style="margin-bottom: 1em">
-            <div class="column is-7">
-                <h3 class="title has-text-weight-bold is-2 has-text-centered has-text-left-mobile">Your new website awaits</h3>
+            <div class="column is-7 small-width-mobile">
+                <h3 class="title has-text-weight-bold is-2 is-size-4-mobile has-text-centered has-text-left-mobile">Your new website awaits</h3>
                 <p class="subtitle has-text-left-mobile">Browse our beautiful collections of website designs</p>
             </div>
         </div>
         {% include './includes/themes.html' with slick='yes' %}
+        <!-- <hr style="visibility: hidden"> -->
+        <p class="has-text-centered">
+            <a href="{% url 'themes' %}" class="button is-warning is-rounded">View all themes</a>
+        </p>
     </div>
 </div>
 
@@ -178,7 +182,7 @@
     <div class="container">
         <div class="has-text-centered columns is-centered" style="margin-bottom: 2em">
             <div class="column is-7">
-                <h3 class="title has-text-weight-bold is-2 has-text-centered">Your Website . Your Budget</h3>
+                <h3 class="title has-text-weight-bold is-2 is-size-4-mobile has-text-centered">Your Website . Your Budget</h3>
                 <p class="subtitle">Choose the right package that fits your budget.</p>
             </div>
         </div>
