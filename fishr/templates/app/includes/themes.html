@@ -2,7 +2,7 @@
     {% load humanize %}
     <div class="columns is-multiline themes is-mobile {% if slick == 'yes' %}has-slick{% endif %}">
     {% for theme in themes %}
-        <div class="column theme is-one-third-desktop is-half-touch">
+        <div class="column theme is-one-third-desktop is-half-tablet is-fullwidth-mobile">
             <div class="box">
                 {% if theme.featured == True %}
                     <span class="is-featured">
