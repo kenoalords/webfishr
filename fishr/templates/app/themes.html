@@ -2,31 +2,36 @@
 
 {% block content %}
 {% load static %}
-<div class="hero" id="themes">
-    <div class="hero-body">
-        <div class="container">
-            <div class="columns is-aligned-center">
-                <div class="column is-6">
-                    <h1 class="title is-2 has-text-weight-bold">
-                        Make your online presence beautiful with our custom website design.
-                    </h1>
-                    <p>
-                        Our beautiful website design collection are custom-made with you in mind giving you the right style for your online presence.
-                    </p>
-                    <p>
-                        Choose any of our professionally designed website theme for your new website.
-                    </p>
-                </div>
-                <div class="column is-6">
-                    <figure class="image">
-                        <img src="{% static 'images/hero-main.png' %}" alt="Make your online presence beautiful">
-                    </figure>
+<section id="video-wrapper">
+    <video src="{% static 'videos/website-hero.mp4' %}" loop autoplay webkit-playsinline="true" playsinline="true" muted="muted" id="website-video"></video>
+    <div class="container">
+        <div class="hero is-medium">
+            <div class="hero-body">
+                <div class="columns">
+                    <div class="column is-7">
+                        <h1 class="title is-2 has-text-weight-bold">
+                            Choose your website design style.
+                        </h1>
+                        <p>
+                            Choose from our collection of beautiful custom website design for your business or personal website.
+                        </p>
+                        <p>
+                            Need help?
+                            <a href="javascript:void(Tawk_API.toggle())" class="button is-rounded is-link is-small has-text-weight-bold">
+                                <span class="icon"><i class="fas fa-comments"></i></span>
+                                <span>Chat with us</span>
+                            </a>
+                        </p>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="section is-light">
+</section>
+
+
+<div class="section">
     <div class="container">
         {% include './includes/themes.html' %}
     </div>
