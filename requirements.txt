@@ -9,7 +9,7 @@ defusedxml==0.6.0
 Django==2.2.9
 django-allauth==0.41.0
 django-appconf==1.0.3
-django-celery==3.3.1
+#django-celery==3.3.1
 django-celery-email==3.0.0
 django-formtools==2.2
 django-meta==1.6.0
@@ -20,7 +20,7 @@ kombu==4.6.7
 more-itertools==8.0.2
 numpy==1.18.0
 oauthlib==3.1.0
-Pillow==6.2.1
+#Pillow==6.2.1
 python3-openid==3.1.0
 pytz==2019.3
 redis==3.3.11
