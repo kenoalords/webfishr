@@ -1,3 +1,4 @@
+import uuid
 from django.shortcuts import render, reverse, render_to_response
 from django.http import HttpResponseRedirect, JsonResponse
 from django.contrib.auth.models import User
@@ -11,6 +12,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.conf import settings
 from django.template import RequestContext
+from django.contrib.gis.geoip2 import GeoIP2
 import requests, json
 
 # App Imports
@@ -161,16 +163,19 @@ class OrderWizardView(LoginRequiredMixin, SessionWizardView):
         context = super().get_context_data(**kwargs)
         context['meta'] = Meta(
             title='Order a website design - %s' % SITE_META,
-            description='Order your website design service and get a professional website in 48 hours.'
+            description='Order your website design service and get a professional website in 72 hours.'
         )
         return context
 
     def get_form_initial(self, step):
         if step == 'theme' and self.request.GET.get('theme', False):
-            return self.initial_dict.get(step, {'theme': self.request.GET.get('theme')})
+            return self.initial_dict.get(step, {'theme': self.request.GET.get('theme'), 'location': self.request.location})
         if step == 'package' and self.request.GET.get('package', False):
-            return self.initial_dict.get(step, {'package': self.request.GET.get('package')})
-        return self.initial_dict.get(step, {})
+            return self.initial_dict.get(step, {'package': self.request.GET.get('package'), 'location': self.request.location})
+        return self.initial_dict.get(step, {'location': self.request.location})
+
+    # def get_form_kwargs(self, step):
+    #     return { 'request': self.request }
 
 
     def done(self, form_list, form_dict, **kwargs):
@@ -183,18 +188,26 @@ class OrderWizardView(LoginRequiredMixin, SessionWizardView):
 
         # Add order
         # amount = Package.objects.get(pk=)
+        if self.request.location == "NG":
+            currency = 'NGN'
+            amount = package.sale_price
+        else:
+            currency = 'USD'
+            amount = package.sale_price_usd
+
         order = Order(
             user=self.request.user,
             package= package,
             theme= theme,
             domain_name=domain_name,
+            currency=currency,
             is_domain_owner=is_domain_owner,
             payment_type=payment_type,
-            amount=package.sale_price
+            amount=amount
         )
         order.save()
         # Redirect to respective pages
-        send_order_notification.delay(order.user.email, order.uuid)
+        send_order_notification.delay(order.user.email, order.pk)
         return HttpResponseRedirect(order.get_absolute_url())
 
 
@@ -203,7 +216,7 @@ class OrderCompleteView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['order'] = Order.objects.get(uuid=kwargs['uuid'])
+        context['order'] = Order.objects.get(pk=kwargs['pk'])
         context['meta'] = Meta(
             title='Order Complete',
             description='Please review your website design order below and choose your preferred payment option.'
@@ -212,7 +225,7 @@ class OrderCompleteView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         try:
-            order = Order.objects.get(uuid=kwargs['uuid'])
+            order = Order.objects.get(pk=kwargs['pk'])
             if order.is_paid == True:
                 messages.warning(request, 'This order has been paid for, please contact us if you have any issues')
                 return HttpResponseRedirect(reverse('dashboard'))
@@ -220,7 +233,8 @@ class OrderCompleteView(TemplateView):
                 postdata = {
                     'amount': order.amount * 100,
                     'email': order.user.email,
-                    'reference': order.uuid,
+                    'reference': uuid.uuid4(),
+                    'currency': order.currency,
                 }
                 headers = {
                     'authorization': 'Bearer %s' % settings.PAYSTACK_SECRET,
@@ -237,6 +251,7 @@ class OrderCompleteView(TemplateView):
                         messages.error(request, 'We couldn\'t process your request at the moment. Please try again')
                         return HttpResponseRedirect(order.get_absolute_url())
                 else:
+                    print(req.text)
                     messages.error(request, 'There seem to be a problem with Paystack at the momemt. This is entirely not your fault. Please wait a few minutes and try the transaction again')
                     return HttpResponseRedirect(order.get_absolute_url())
         except Order.DoesNotExist:

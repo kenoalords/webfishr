@@ -10,18 +10,18 @@
                 </figure>
             </div>
             <div class="column is-8">
-                <h2 class="title is-3 has-text-weight-bold">{{ order.package.title }} Package</h2>
+                <h2 class="title is-4 is-size-5-mobile has-text-weight-bold" style="margin-bottom: 5px">{{ order.package.title }} Package</h2>
                 <ul>
                     <li>{{ order.domain_name }}</li>
                     <li>N{{ order.amount|intcomma }}</li>
                     <li>{{ order.date|date:'jS M, Y' }}</li>
                     <li>{% if order.is_paid == True %}
-                            <span class="has-text-success">
+                            <span class="button is-rounded is-success">
                                 <span class="icon"><i class="fas fa-check fa-sm"></i></span>
-                                <span>Paid</span>
+                                <span>Active</span>
                             </span>
                         {% else %}
-                            <a href="{{ order.get_absolute_url }}" class="has-text-danger">
+                            <a href="{{ order.get_absolute_url }}" class="button is-primary is-rounded">
                                 <span class="icon"><i class="fas fa-exclamation-triangle fa-sm"></i></span>
                                 <span>Make payment</span>
                             </a>

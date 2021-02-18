@@ -3,7 +3,7 @@
     <div class="level-left">
         <div class="level-item">
             {% if wizard.steps.prev %}
-            <button name="wizard_goto_step" type="submit" class="button is-white" value="{{ wizard.steps.prev }}">
+            <button name="wizard_goto_step" type="submit" class="button is-white is-rounded" value="{{ wizard.steps.prev }}">
                 <span class="icon"><i class="fas fa-arrow-left"></i></span><span>{% trans "Prev" %}</span>
             </button>
             {% endif %}

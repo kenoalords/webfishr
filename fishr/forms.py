@@ -7,19 +7,35 @@ from django.core.validators import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 class PackageModelChoiceField(forms.ModelChoiceField):
+	# def __init__(self, *args, **kwargs):
+	# 	super(PackageModelChoiceField, self).__init__(*args, **kwargs)
+	# 	print(kwargs)
 	def label_from_instance(self, obj):
-		return mark_safe( '<div><h4 class="title is-3 is-size-4-mobile has-text-weight-bold is-marginless">%s</h4><div><span class="cost has-text-weight-bold has-text-success">₦%s</span> <del class="has-text-light">N%s</del></div></div>' % (obj.title, intcomma(obj.sale_price), obj.regular_price) )
+		sale_price = f"₦{obj.sale_price:,}"
+		regular_price = f"₦{obj.regular_price:,}"
+		try:
+			if self.location == "US":
+				sale_price = f"${obj.sale_price_usd:,}"
+				regular_price = f"${obj.regular_price_usd:,}"
+		except Exception:
+			pass
+		return mark_safe( f'<div><h4 class="title is-3 is-size-4-mobile has-text-weight-bold is-marginless">{sale_price}</h4><div><span class="cost has-text-weight-bold has-text-dark is-size-4">{obj.title} Package</span></div></div>' )
 
 class ThemeModelChoiceField(forms.ModelChoiceField):
 	def label_from_instance(self, obj):
 		return mark_safe( '<figure class="image"><img src="%s" alt="%s"><figcaption class="">%s</figcaption></figure>' % (obj.image.url, obj.title, obj.title) )
 
 class PackageForm(forms.ModelForm):
-    package = PackageModelChoiceField(label="", queryset=Package.objects.filter(category__title="Web Design"), widget=forms.RadioSelect(attrs={'class': 'radio-select'}), empty_label=None)
+	def __init__(self, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+		self.fields['package'].location = kwargs['initial']['location']
 
-    class Meta:
-        fields = ['package']
-        model = Order
+	package = PackageModelChoiceField(label="", queryset=Package.objects.filter(category__title="Web Design"), widget=forms.RadioSelect(attrs={'class': 'radio-select'}), empty_label=None)
+	class Meta:
+		fields = ['package']
+		model = Order
+
+
 
 class ThemeForm(forms.ModelForm):
     theme = ThemeModelChoiceField(label="", queryset=Theme.objects.all(), widget=forms.RadioSelect(attrs={'class': 'radio-select'}), empty_label=None)
@@ -41,7 +57,7 @@ class DomainForm(forms.Form):
 
 PAYMENT_CHOICES = (
 	('online', 'Pay online using your debit card via PayStack'),
-	('transfer', 'Pay by Bank Transfer'),
+	('transfer', 'Pay by Bank Transfer (Nigerian\'s Only)'),
 )
 class PaymentForm(forms.Form):
 	type = forms.ChoiceField( choices=PAYMENT_CHOICES, widget=forms.RadioSelect())

@@ -11693,7 +11693,7 @@ body.is-menu-active:after {
 }
 
 p {
-  font-size: 1em;
+  font-size: 15px;
   margin-bottom: 1em;
   font-weight: 300;
 }
@@ -11726,6 +11726,9 @@ p {
   color: white;
 }
 
+.navbar.is-fixed-top {
+  box-shadow: 0 3px 12px rgba(142, 202, 230, 0.2), 0 12px 48px rgba(2, 48, 71, 0.1);
+}
 .navbar.is-fixed-top ~ #page {
   margin-top: 4em;
 }
@@ -11740,7 +11743,7 @@ p {
 }
 .navbar .navbar-menu .navbar-item {
   color: #023047;
-  font-size: 16px;
+  font-size: 15px;
 }
 .navbar .navbar-menu .navbar-item:hover {
   color: #219EBC;
@@ -11870,7 +11873,7 @@ p {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   display: inline-block;
-  background: #219EBC;
+  background: #48c774;
   font-weight: 900;
   padding: 10px;
   position: relative;
@@ -11885,7 +11888,7 @@ p {
   left: 0;
   position: absolute;
   bottom: -29px;
-  border: 30px solid #219EBC;
+  border: 30px solid #48c774;
   border-right-color: transparent;
   border-bottom-color: transparent;
   border-top: none;
@@ -11895,7 +11898,7 @@ p {
   right: 0;
   position: absolute;
   bottom: -29px;
-  border: 30px solid #219EBC;
+  border: 30px solid #48c774;
   border-left-color: transparent;
   border-bottom-color: transparent;
   border-top: none;
@@ -12303,9 +12306,12 @@ article.blog .content {
 }
 #video-wrapper #website-video {
   position: absolute;
-  top: -20%;
-  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   left: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 @media screen and (min-width: 480px) and (max-width: 768px) {
@@ -12343,12 +12349,6 @@ article.blog .content {
 
   #video-wrapper .hero-body {
     padding: 5em 2em;
-  }
-  #video-wrapper #website-video {
-    top: 0 !important;
-    height: 120%;
-    width: auto;
-    max-width: unset;
   }
 }
 @media screen and (max-width: 480px) {
@@ -12489,13 +12489,5 @@ article.blog .content {
 
   #video-wrapper .hero-body {
     padding: 5em 2em;
-  }
-  #video-wrapper #website-video {
-    top: 0;
-    left: -10%;
-    right: -10%;
-    height: 100%;
-    width: auto;
-    max-width: unset;
   }
 }

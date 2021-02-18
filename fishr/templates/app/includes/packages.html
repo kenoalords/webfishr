@@ -1,5 +1,5 @@
 {% if packages %}
-    {% load humanize discount %}
+    {% load humanize discount get_pricing %}
     <div class="columns is-multiline packages">
     {% for package in packages %}
         <div class="column package is-4">
@@ -9,13 +9,13 @@
                     <p>{{ package.description }}</p>
                     <div class="price">
                         {% if package.regular_price %}
-                            <del class="regular-price">Was N{{ package.regular_price|intcomma }}</del>
+                            <del class="regular-price">Was {{ package|pricing_regular:request }}</del>
                         {% endif %}
-                        <span class="sale-price">N{{ package.sale_price|intcomma }}</span>
+                        <span class="sale-price">{{ package|pricing:request }}</span>
                         <div class="discount">
                             <span class="discount_tag">
                                 <span>
-                                    <div>{{ package.regular_price|package_discount:package.sale_price }}</div>
+                                    <div>{{ package|package_discount:request }}</div>
                                     <div>OFF</div>
                                 </span>
                             </span>
@@ -28,10 +28,15 @@
                         {% for feature in package.features.all %}
                             <li>{{ feature.title }}</li>
                         {% endfor %}
+                        {% if request.location == 'NG' %}
+                            <li class="has-text-weight-bold">Renews at N25,000 Yearly</li>
+                        {% else %}
+                            <li class="has-text-weight-bold">Renews at $75 Yearly</li>
+                        {% endif %}
                     </ul>
                 {% endif %}
                 <div class="action">
-                    <a href="{% url 'signup' %}?package={{ package.id }}" class="button is-primary is-rounded is-fullwidth">Choose Package</a>
+                    <a href="{% url 'signup' %}?package={{ package.id }}" class="button is-success is-rounded is-fullwidth">Order Package</a>
                 </div>
             </div>
         </div>

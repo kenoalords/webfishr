@@ -40,9 +40,9 @@ def send_subscription_email(email, uuid):
 
 # Order notification
 @shared_task
-def send_order_notification(email, uuid):
+def send_order_notification(email, pk):
     order = Order.objects.get(uuid=uuid)
-    link = "{0}{1}".format(SITE.domain, reverse('order', kwargs={ 'uuid': uuid }))
+    link = "{0}{1}".format(SITE.domain, reverse('order', kwargs={ 'pk': pk }))
     email_body = render_to_string('email/order_notification.html', context={ 'uuid': uuid, 'current_site': SITE, 'order': order, 'link': link })
     site_name = "{0} Team".format(SITE.name)
     email_body_text = """

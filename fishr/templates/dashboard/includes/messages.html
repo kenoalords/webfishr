@@ -3,5 +3,6 @@
     {% for message in messages %}
     <div{% if message.tags %} class="is-{{ message.tags }} notification"{% endif %}>{{ message }}</div>
     {% endfor %}
+    <br>
 </div>
 {% endif %}

@@ -1,16 +1,17 @@
 {% extends './base.html' %}
 
 {% block content %}
-{% load static i18n humanize %}
+{% load static i18n humanize get_pricing %}
 
     <div class="section is-medium is-light">
         <div class="container">
             <div class="columns is-centered">
                 <div class="column is-10">
+                    {% include '../dashboard/includes/messages.html' %}
                     <div class="box">
                         <h1 class="title is-3 has-text-weight-bold">Order Details</h1>
                         <hr>
-                        <div class="columns">
+                        <div class="columns is-aligned-center">
                             <div class="column">
                                 <figure class="image">
                                     <img src="{{ order.theme.image.url }}" alt="{{ order.theme.title }}">
@@ -20,14 +21,14 @@
                                 <h4 class="title is-3 has-text-weight-bold is-marginless">{{ order.package.title }} Package</h4>
                                 <ul>
                                     <li><span class="icon"><i class="fas fa-globe"></i></span> <span>{{ order.domain_name }}</span></li>
-                                    <li><span class="icon"><i class="fas fa-wallet"></i></span> <span>N{{ order.amount|intcomma }}</span></li>
+                                    <li><span class="icon"><i class="fas fa-wallet"></i></span> <span>{{ order.currency }} {{ order.amount|intcomma }}</span></li>
                                 </ul>
                                 <hr>
                                 {% if order.payment_type == 'online' %}
                                     <form action="{{ order.get_absolute_url }}" method="post">
                                         {% csrf_token %}
                                         <div class="field">
-                                            <button class="button is-primary is-fullwidth" type="submit">Pay now</button>
+                                            <button class="button is-primary is-fullwidth is-rounded" type="submit">Pay now</button>
                                         </div>
                                         <br>
                                         <figure class="image paystack">

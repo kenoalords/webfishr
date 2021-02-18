@@ -23,8 +23,10 @@ class Category(models.Model):
 class Package(models.Model):
     title = models.CharField(max_length=32)
     description = models.CharField(max_length=128)
-    regular_price = models.IntegerField(blank=True)
+    regular_price = models.IntegerField(blank=True, null=True)
+    regular_price_usd = models.IntegerField(blank=True, null=True)
     sale_price = models.IntegerField()
+    sale_price_usd = models.IntegerField(blank=True)
     position = models.IntegerField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     features = models.ManyToManyField('Feature')
@@ -67,6 +69,7 @@ class Order(models.Model):
     theme = models.ForeignKey(Theme, on_delete=models.CASCADE, blank=True)
     domain_name = models.URLField(blank=True)
     amount = models.FloatField()
+    currency = models.CharField(max_length=12, default="NGN", choices=( ('NGN', 'NGN'), ('USD', 'USD') ))
     amount_paid = models.FloatField(null=True)
     transaction_ref = models.CharField(max_length=1024, blank=True)
     payment_type = models.CharField(choices=(('online', 'Online Payment'), ('transfer', 'Bank Transfer')), max_length=12)
@@ -80,7 +83,7 @@ class Order(models.Model):
         return '%s - %s' % (self.user.first_name, self.package.title)
 
     def get_absolute_url(self):
-        return reverse('order', kwargs={ 'uuid': self.uuid })
+        return reverse('order', kwargs={ 'pk': self.pk })
 
     class Meta:
         ordering = ['-date']

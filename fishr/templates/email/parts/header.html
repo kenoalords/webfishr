@@ -1,9 +1,9 @@
 {% load static %}
 <td width="40%" class="logo" style="text-align: left;">
-    <h1><a href="{{ current_site.domain }}?utm_source=email_header">
-        <img src="{{ current_site.domain }}{% static 'images/webfishr-logo.png' %}" alt="{{ site.name }}" style="width:80px; height: auto;">
+    <h1><a href="http://{{ current_site.domain }}?utm_source=email_header">
+        <img src="http://{{ current_site.domain }}{% static 'images/webfishr-logo-4.svg' %}" alt="{{ site.name }}" style="width:120px; height: auto;">
     </a></h1>
   </td>
   <td width="60%" class="logo" style="text-align: right;">
-    <a href="{{ current_site.domain }}{% url 'themes' %}" style="display: inline-block; padding: 2px 1em; background: #65bf78; color: #fff; border-radius: 48px; text-decoration: none;">View websites</a>
+    <a href="http://{{ current_site.domain }}{% url 'themes' %}" style="display: inline-block; padding: 2px 1em; background: #65bf78; color: #fff; border-radius: 48px; text-decoration: none;">View websites</a>
   </td>

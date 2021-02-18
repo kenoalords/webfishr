@@ -17,7 +17,7 @@ urlpatterns = [
     path('signup/', view.OrderWizardView.as_view(), name="signup"),
     path('faq/', view.FaqTemplateView.as_view(), name="faq"),
     path('terms-condition/', TemplateView.as_view(template_name='app/terms.html'), name="terms"),
-    path('order/<str:uuid>/', view.OrderCompleteView.as_view(), name="order"),
+    path('order/<str:pk>/', view.OrderCompleteView.as_view(), name="order"),
     path('order/paystack/callback/', view.PaystackCallback.as_view(), name="paystack_callback"),
     path('website-design/', view.WebsiteThemeView.as_view(), name="themes"),
     path('pricing/', view.PricingView.as_view(), name="pricing"),
